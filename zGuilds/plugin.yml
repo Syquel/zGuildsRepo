@@ -1,0 +1,39 @@
+name: zGuilds
+main: latros.z.guilds.Main
+version: 0.2.1.2
+description: A guild plugin.
+authors:
+  - latros
+commands:
+    guild:
+        aliases: [gu]
+        description: The zGuilds base command.
+permissions:
+  zguilds.player.create: {description: asdf}
+  zguilds.player.disband: {description: asdf}
+  zguilds.player.invite: {description: asdf}
+  zguilds.player.cancelinvite: {description: asdf}
+  zguilds.player.checkinvites: {description: asdf}
+  zguilds.player.promote: {description: asdf}
+  zguilds.player.demote: {description: asdf}
+  zguilds.player.kick: {description: asdf}
+  zguilds.player.newleader: {description: asdf}
+  zguilds.player.info: {description: asdf}
+  zguilds.player.list: {description: asdf}
+  zguilds.player.viewroster: {description: asdf}
+  zguilds.player.settype: {description: asdf}
+  zguilds.player.setmaxmembers: {description: asdf}
+  zguilds.player.renamerank: {description: asdf}
+  zguilds.player.setdefaultrank: {description: asdf}
+  zguilds.player.ranklist: {description: asdf}
+  zguilds.player.sethome: {description: asdf}
+  zguilds.player.hometele: {description: asdf}
+  zguilds.player.compass: {description: asdf}
+  zguilds.player.playerinfo: {description: asdf}
+  zguilds.player.help: {description: asdf}
+  zguilds.admin.setlevel: {description: asdf}
+  zguilds.admin.removemember: {description: asdf}
+  zguilds.admin.addmember: {description: asdf}
+  zguilds.admin.banplayer: {description: asdf}
+  zguilds.admin.hometele: {description: asdf}
+  zguilds.admin.sethome: {description: asdf}
