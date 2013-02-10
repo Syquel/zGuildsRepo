@@ -10,6 +10,11 @@ public class Admin {
 	
 	static String targetGuild;
 	static int targetGuildsNewLevel;
+	static String targetPlayersName;
+	static String targetPlayersGuild;
+	static int currRosterSize;
+	static int updRosterSize;
+	static String targetPlayersActualGuild;
 	
 	public static boolean adminHomeTele(String[] args, CommandSender s) {
 		return true;
@@ -24,6 +29,60 @@ public class Admin {
 	}	
 	
 	public static boolean manuallyRemoveMember(String[] args, CommandSender s){
+		//Various checks
+		if(Util.isBannedFromGuilds(s) == true){
+			//Checking if they are banned from the guilds system
+			s.sendMessage(ChatColor.RED + "You are currently banned from interacting with the Guilds system. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(!s.hasPermission("zguilds.admin.removemember")){
+			//Checking if they have the permission node to proceed
+			s.sendMessage(ChatColor.RED + "You lack sufficient permissions to remove a player from a guild. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(args.length != 4){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild remove member command! Proper syntax is: \"/guild admin removemember <guildName> <playerName>\"");
+			return false;
+		}
+		targetPlayersName = args[3].toLowerCase();
+		targetPlayersGuild = args[2].toLowerCase();
+		
+		if(Main.guilds.getConfigurationSection("Guilds." + targetPlayersGuild) == null){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "No guild by that name exists.");
+			return false;
+		}
+		
+		if(Main.players.getConfigurationSection("Players." + targetPlayersName) == null){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "No player by that name exists.");
+			return false;
+		}
+		
+		if(Util.isGuildLeader(targetPlayersName) == true){
+			s.sendMessage(ChatColor.RED + "That player is the guild leader, you can't manually remove them from the guild. You have to set a new guild leader first.");
+			return false;
+		}
+		
+		targetPlayersActualGuild = Main.players.getString("Players." + targetPlayersName + ".Current_Guild");
+		
+		if(!Main.players.getString("Players." + targetPlayersName + ".Current_Guild").matches(targetPlayersGuild)){
+			s.sendMessage(ChatColor.RED + "That player isn't in the guild you specified. They're in the guild " + targetPlayersActualGuild + ".");
+			return false;
+		}
+		
+		currRosterSize = Main.guilds.getInt("Guilds." + targetPlayersGuild + ".Roster_Size");
+		updRosterSize = currRosterSize - 1;
+		Main.players.set("Players." + targetPlayersName + ".Guild_Leader", false);
+		Main.players.set("Players." + targetPlayersName + ".Current_Guild", "None");
+		Main.players.set("Players." + targetPlayersName + ".Current_Rank", 0);
+		Main.players.set("Players." + targetPlayersName + ".Guild_Contributions", 0);
+		Main.players.set("Players." + targetPlayersName + ".Member_Since", "N/A");
+		Main.players.set("Players." + targetPlayersName + ".Current_Invitation", "N/A");
+		Main.guilds.set("Guilds." + targetPlayersGuild + ".Roster_Size", updRosterSize);
+		s.sendMessage(ChatColor.DARK_GREEN + "You removed the user " + targetPlayersName + " from the guild " + targetPlayersGuild + ".");
+		Main.saveYamls();
 		return true;
 	}
 	

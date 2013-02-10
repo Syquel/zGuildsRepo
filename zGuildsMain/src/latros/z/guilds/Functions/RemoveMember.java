@@ -38,7 +38,7 @@ public class RemoveMember {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild leave command! Proper syntax is: \"/guild leave\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == true){
+		if(Util.isGuildLeader(s.getName()) == true){
 			//Checking if the create command has proper args
 			s.sendMessage(ChatColor.RED + "You're the guild leader, you can't leave the guild! Promote a new leader first! (/guild setnewleader <player name>)");
 			return false;
@@ -81,7 +81,7 @@ public class RemoveMember {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild kick command! Proper syntax is: \"/guild kick <player name>\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false && Util.isOfficer(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false && Util.isOfficer(s) == false){
 			//Checking if the player is the guild leader
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader or officer to use that command.");
 			return false;

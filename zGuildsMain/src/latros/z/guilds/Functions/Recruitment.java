@@ -52,7 +52,7 @@ public class Recruitment {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild disband command! Proper syntax is: \"/guild invite PlayerName\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false && Util.isOfficer(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false && Util.isOfficer(s) == false){
 			//Checking if the player is the guild leader
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader or officer to use that command.");
 			return false;

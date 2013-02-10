@@ -50,7 +50,7 @@ public class LevelUnlocks {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild set home command! Proper syntax is: \"/guild powers sethome\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false){
 			//Checking if the player is the guild leader or officer
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader to use that command.");
 			return false;

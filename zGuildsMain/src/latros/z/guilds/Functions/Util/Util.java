@@ -23,8 +23,8 @@ public class Util {
 		return true;
 	}
 	
-	public static boolean isGuildLeader(CommandSender s){
-		playerName = s.getName().toLowerCase();
+	public static boolean isGuildLeader(String s){
+		playerName = s.toLowerCase();
 		isGuildLeader = Main.players.getBoolean("Players." + playerName + ".Guild_Leader");
 		if(isGuildLeader == false){
 			return false;

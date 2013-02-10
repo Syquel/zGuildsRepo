@@ -60,7 +60,7 @@ public class MemberManagement {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild promote command! Proper syntax is: \"/guild promote PlayerName\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false && Util.isOfficer(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false && Util.isOfficer(s) == false){
 			//Checking if the player is the guild leader or officer
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader or officer to use that command.");
 			return false;
@@ -133,7 +133,7 @@ public class MemberManagement {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild demote command! Proper syntax is: \"/guild demote PlayerName\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false && Util.isOfficer(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false && Util.isOfficer(s) == false){
 			//Checking if the player is the guild leader or officer
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader or officer to use that command.");
 			return false;
@@ -212,7 +212,7 @@ public class MemberManagement {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild Set New Leader command! Proper syntax is: \"/guild setnewleader <player name>\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false){
 			//Checking if the player is the guild leader
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader to use that command.");
 			return false;

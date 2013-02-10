@@ -17,7 +17,6 @@ public class ModifyGuild {
 	static String oldRankName;
 	
 	public static boolean checkGuild(String[] args, CommandSender s){
-		//TODO: appropriate checks
 		String st = Main.players.getString("Players." + args[0].toLowerCase() + ".Current_Guild");
 		if(st.matches("None")){
 			s.sendMessage(ChatColor.DARK_GREEN + "The player " + ChatColor.RED + args[0] + ChatColor.DARK_GREEN + " is not currently in a guild.");
@@ -73,7 +72,7 @@ public class ModifyGuild {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild set type command! Proper syntax is: \"/guild settype <Type>\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false){
 			//Checking if the player is the guild leader or officer
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader to use that command.");
 			return false;
@@ -112,7 +111,7 @@ public class ModifyGuild {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild set max members command! Proper syntax is: \"/guild setmaxmembers <#>\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false){
 			//Checking if the player is the guild leader or officer
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader to use that command.");
 			return false;
@@ -155,7 +154,7 @@ public class ModifyGuild {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild rename rank command! Proper syntax is: \"/guild renamerank <rank#> <newname>\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false){
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader to use that command.");
 			return false;
 		}
@@ -209,7 +208,7 @@ public class ModifyGuild {
 			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild set lowest rank command! Proper syntax is: \"/guild setmaxmembers <#>\"");
 			return false;
 		}
-		if(Util.isGuildLeader(s) == false){
+		if(Util.isGuildLeader(s.getName()) == false){
 			//Checking if the player is the guild leader or officer
 			s.sendMessage(ChatColor.RED + "You need to be the guild leader to use that command.");
 			return false;
