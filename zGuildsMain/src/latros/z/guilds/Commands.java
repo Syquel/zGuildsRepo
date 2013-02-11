@@ -215,8 +215,13 @@ public class Commands implements CommandExecutor{
 					//10/02/2013 Initial pass complete
 				}
 				
-				if(args[1].matches("banplayer")){
+				if(args[1].matches("banplayer") || args[1].matches("ban")){
 					Admin.banPlayer(args, s);
+					return true;
+				}
+				
+				if(args[1].matches("unbanplayer") || args[1].matches("unban")){
+					Admin.unbanPlayer(args, s);
 					return true;
 				}
 				

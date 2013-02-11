@@ -34,7 +34,7 @@ public class Util {
 	
 	public static boolean isBannedFromGuilds(CommandSender s){
 		playerName = s.getName().toLowerCase();
-		isBannedFromGuilds = Main.players.getBoolean("Players." + playerName + ".Banned_from_Guilds");
+		isBannedFromGuilds = Main.players.getBoolean("Players." + playerName + ".Banned");
 		if(isBannedFromGuilds == false){
 			return false;
 		}

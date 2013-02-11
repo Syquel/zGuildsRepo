@@ -30,8 +30,92 @@ public class Admin {
 	}	
 	
 	public static boolean banPlayer(String[] args, CommandSender s) {
+		//Various checks
+		if(Util.isBannedFromGuilds(s) == true){
+			//Checking if they are banned from the guilds system
+			s.sendMessage(ChatColor.RED + "You are currently banned from interacting with the Guilds system. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(!s.hasPermission("zguilds.admin.banplayer")){
+			//Checking if they have the permission node to proceed
+			s.sendMessage(ChatColor.RED + "You lack sufficient permissions to ban a player from using guilds. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(args.length != 3){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild ban command! Proper syntax is: \"/guild admin ban <playerName>\"");
+			return false;
+		}
+		
+		targetPlayersName = args[2].toLowerCase();
+		
+		if(Main.players.getConfigurationSection("Players." + targetPlayersName) == null){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "No player by that name exists.");
+			return false;
+		}
+		
+		if(!Main.players.getString("Players." + targetPlayersName + ".Current_Guild").matches("None")){
+			s.sendMessage(ChatColor.RED + "Your target player is in a guild, remove them from their guild first.");
+			return false;
+		}
+		
+		if(Main.players.getBoolean("Players." + targetPlayersName + ".Banned") == true){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "That player is already banned from using Guilds.");
+			return false;
+		}
+		
+		Main.players.set("Players." + targetPlayersName + ".Banned", true);
+		s.sendMessage(ChatColor.DARK_GREEN + "You banned " + targetPlayersName + " from using Guilds functionality.");
+		Main.saveYamls();
+		
 		return true;
-	}	
+	}		
+	
+	public static boolean unbanPlayer(String[] args, CommandSender s) {
+		//Various checks
+		if(Util.isBannedFromGuilds(s) == true){
+			//Checking if they are banned from the guilds system
+			s.sendMessage(ChatColor.RED + "You are currently banned from interacting with the Guilds system. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(!s.hasPermission("zguilds.admin.unbanplayer")){
+			//Checking if they have the permission node to proceed
+			s.sendMessage(ChatColor.RED + "You lack sufficient permissions to unban a player from using guilds. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(args.length != 3){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild unban command! Proper syntax is: \"/guild admin unban <playerName>\"");
+			return false;
+		}
+		
+		targetPlayersName = args[2].toLowerCase();
+		
+		if(Main.players.getConfigurationSection("Players." + targetPlayersName) == null){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "No player by that name exists.");
+			return false;
+		}
+		
+		if(Main.players.getBoolean("Players." + targetPlayersName + ".Banned") == false){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "That player isn't banned from using Guilds.");
+			return false;
+		}
+		
+		if(!Main.players.getString("Players." + targetPlayersName + ".Current_Guild").matches("None")){
+			s.sendMessage(ChatColor.RED + "Your target player is in a guild, remove them from their guild first.");
+			return false;
+		}
+		
+		Main.players.set("Players." + targetPlayersName + ".Banned", false);
+		s.sendMessage(ChatColor.DARK_GREEN + "You unbanned " + targetPlayersName + " from using Guilds functionality.");
+		Main.saveYamls();
+		
+		return true;
+	}
 	
 	public static boolean manuallyRemoveMember(String[] args, CommandSender s){
 		//Various checks
