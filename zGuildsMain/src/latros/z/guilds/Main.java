@@ -37,8 +37,8 @@ public class Main extends JavaPlugin {
 	// TOTAL: 3/4
 	
 	// ------------ LAUNCH FEATURES ADMIN -------------
-	// setlevel(D), removemember, addmember, banplayer, hometeleother, sethomeother, help(D)
-	// TOTAL: 2/7
+	// setlevel(D), removemember(D), addmember(D), banplayer, hometeleother, sethomeother, help(D)
+	// TOTAL: 3/7
 	
 	static String name, displayname, version, description;
 	static Main plugin;

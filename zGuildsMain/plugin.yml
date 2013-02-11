@@ -1,6 +1,6 @@
 name: zGuilds
 main: latros.z.guilds.Main
-version: 0.2.1.2
+version: 0.3.3.0
 description: A guild plugin.
 authors:
   - latros

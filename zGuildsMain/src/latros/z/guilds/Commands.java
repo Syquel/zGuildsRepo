@@ -206,11 +206,13 @@ public class Commands implements CommandExecutor{
 				if(args[1].matches("removemember")){
 					Admin.manuallyRemoveMember(args, s);
 					return true;
+					//10/02/2013 Initial pass complete
 				}
 				
 				if(args[1].matches("addmember")){
 					Admin.manuallyAddMember(args, s);
 					return true;
+					//10/02/2013 Initial pass complete
 				}
 				
 				if(args[1].matches("banplayer")){

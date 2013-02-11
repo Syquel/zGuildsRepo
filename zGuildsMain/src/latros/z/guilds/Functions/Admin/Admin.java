@@ -1,5 +1,7 @@
 package latros.z.guilds.Functions.Admin;
 
+import java.util.Date;
+
 import latros.z.guilds.Main;
 import latros.z.guilds.Functions.Util.Util;
 
@@ -15,6 +17,9 @@ public class Admin {
 	static int currRosterSize;
 	static int updRosterSize;
 	static String targetPlayersActualGuild;
+	static int targetPlayersGuildNewMemberStartingRank;
+	static Date now;
+	static String nowString;
 	
 	public static boolean adminHomeTele(String[] args, CommandSender s) {
 		return true;
@@ -91,17 +96,59 @@ public class Admin {
 	}
 
 	public static boolean manuallyAddMember(String[] args, CommandSender s) {
-			//TODO: appropriate checks
-			Boolean il = Main.players.getBoolean("Players." + args[0].toLowerCase() + ".Guild_Leader");
-			if(il == true){
-				s.sendMessage(ChatColor.RED + "The player " + args[0] + " is a guild leader. You cannot manually modify the guild of a player who is a guild leader.");
-				return true;
-			}
-			Main.players.set("Players." + args[0] + ".Current_Guild", args[1]);
-			Main.players.set("Players." + args[0] + ".Guild_Leader", false);
-			s.sendMessage(ChatColor.DARK_GREEN + "You set the guild of " + args[0].toLowerCase() + " to " + ChatColor.RED + args[1] + ChatColor.DARK_GREEN + ".");
-			Main.saveYamls();
-			return true;
+		//Various checks
+		if(Util.isBannedFromGuilds(s) == true){
+			//Checking if they are banned from the guilds system
+			s.sendMessage(ChatColor.RED + "You are currently banned from interacting with the Guilds system. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(!s.hasPermission("zguilds.admin.addmember")){
+			//Checking if they have the permission node to proceed
+			s.sendMessage(ChatColor.RED + "You lack sufficient permissions to add a player to a guild. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(args.length != 4){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild add member command! Proper syntax is: \"/guild admin addmember <guildName> <playerName>\"");
+			return false;
+		}
+		
+		targetPlayersName = args[3].toLowerCase();
+		targetPlayersGuild = args[2].toLowerCase();
+		
+		if(Main.guilds.getConfigurationSection("Guilds." + targetPlayersGuild) == null){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "No guild by that name exists.");
+			return false;
+		}
+		
+		if(Main.players.getConfigurationSection("Players." + targetPlayersName) == null){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "No player by that name exists.");
+			return false;
+		}
+		
+		if(!Main.players.getString("Players." + targetPlayersName + ".Current_Guild").matches("None")){
+			s.sendMessage(ChatColor.RED + "Your target player is already in a guild, cannot add them to a new one.");
+			return false;
+		}
+		
+		currRosterSize = Main.guilds.getInt("Guilds." + targetPlayersGuild + ".Roster_Size");
+		updRosterSize = currRosterSize + 1;
+		targetPlayersGuildNewMemberStartingRank = Main.guilds.getInt("Guilds." + targetPlayersGuild + ".New_Member_Starting_Rank");
+		now = new Date();
+		nowString = now.toString();
+		
+		Main.players.set("Players." + targetPlayersName + ".Guild_Leader", false);
+		Main.players.set("Players." + targetPlayersName + ".Current_Guild", targetPlayersGuild);
+		Main.players.set("Players." + targetPlayersName + ".Current_Rank", targetPlayersGuildNewMemberStartingRank);
+		Main.players.set("Players." + targetPlayersName + ".Guild_Contributions", 0);
+		Main.players.set("Players." + targetPlayersName + ".Member_Since", nowString);
+		Main.players.set("Players." + targetPlayersName + ".Current_Invitation", "N/A");
+		Main.guilds.set("Guilds." + targetPlayersGuild + ".Roster_Size", updRosterSize);
+		s.sendMessage(ChatColor.DARK_GREEN + "You added the user " + targetPlayersName + " to the guild " + targetPlayersGuild + ".");
+		Main.saveYamls();
+		return true;
 	}
 
 	public static boolean manuallySetGuildLevel(String[] args, CommandSender s) {
