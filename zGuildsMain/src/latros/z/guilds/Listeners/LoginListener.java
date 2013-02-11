@@ -44,6 +44,9 @@ public class LoginListener implements Listener{
 			Main.config.set("Level_Unlocks.SetHome.Enabled", true);
 			Main.config.set("Level_Unlocks.SetHome.Cooldown_(Minutes)", 0.5);
 			Main.config.set("Level_Unlocks.SetHome.Level_Unlocked", 2);
+			Main.config.set("Level_Unlocks.Compass.Enabled", true);
+			Main.config.set("Level_Unlocks.Compass.Cooldown_(Seconds)", 0.5);
+			Main.config.set("Level_Unlocks.Compass.Level_Unlocked", 2);
 			
 			//Guild Creation Defaults Configuration
 			Main.config.set("Guild_Creation_Defaults.Created", false);

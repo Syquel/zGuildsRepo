@@ -147,6 +147,67 @@ public class LevelUnlocks {
 	}
 	
 	public static boolean compassPoint(String[] args, CommandSender s){
+		
+		//Various checks
+		if(Util.isBannedFromGuilds(s) == true){
+			//Checking if they are banned from the guilds system
+			s.sendMessage(ChatColor.RED + "You are currently banned from interacting with the Guilds system. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(!s.hasPermission("zguilds.powers.compass")){
+			//Checking if they have the permission node to proceed
+			s.sendMessage(ChatColor.RED + "You lack sufficient permissions to use the guild compass. Talk to your server admin if you believe this is in error.");
+			return false;
+		}
+		if(!Util.isInGuild(s) == true){
+			//Checking if they're already in a guild
+			s.sendMessage(ChatColor.RED + "You need to be in a guild to use this command.");
+			return false;
+		}
+		if(args.length > 2 || args.length == 1){
+			//Checking if the create command has proper args
+			s.sendMessage(ChatColor.RED + "Incorrectly formatted guild compass command! Proper syntax is: \"/guild powers compass\"");
+			return false;
+		}
+		if(Main.config.getBoolean("Level_Unlocks.Compass.Enabled") == false){
+			s.sendMessage(ChatColor.RED + "That feature is not enabled on your server. Talk to your server admin if you believe this is an error.");
+			return false;
+		}
+		sendersName = s.getName().toLowerCase();
+		sendersGuild = Main.players.getString("Players." + sendersName + ".Current_Guild");
+		requiredLevel = Main.config.getInt("Level_Unlocks.Compass.Level_Unlocked");
+		currentGuildsLevel = Main.guilds.getInt("Guilds." + sendersGuild + ".Level");
+		if(currentGuildsLevel < requiredLevel){
+			s.sendMessage(ChatColor.RED + "Your guild isn't high enough level to access that guild power. Your guild is level " + currentGuildsLevel + ", and that guild power requires level " + requiredLevel + ".");
+			return false;
+		}
+		if(Main.guilds.getInt("Guilds." + sendersGuild + ".Home_Location.X_Coordinate") == 0 && Main.guilds.getInt("Guilds." + sendersGuild + ".Home_Location.Y_Coordinate") == 0 && Main.guilds.getInt("Guilds." + sendersGuild + ".Home_Location.Z_Coordinate") == 0){
+			s.sendMessage(ChatColor.RED + "Your guild doesn't have a home location set. Cannot point your compass to that location.");
+			return false;
+		}
+		
+		senderAsPlayer = (Player) s;
+		
+		guildsHomeLocationX = Main.guilds.getDouble("Guilds." + sendersGuild + ".Home_Location.X_Coordinate");
+		guildsHomeLocationY = Main.guilds.getDouble("Guilds." + sendersGuild + ".Home_Location.Y_Coordinate") + 1;
+		guildsHomeLocationZ = Main.guilds.getDouble("Guilds." + sendersGuild + ".Home_Location.Z_Coordinate");
+		guildsHomeLocationWorld = Bukkit.getWorld(Main.guilds.getString("Guilds." + sendersGuild + ".Home_Location.World"));
+		
+		Location teleportLocation = senderAsPlayer.getLocation();
+		
+		teleportLocation.setX(guildsHomeLocationX);
+		teleportLocation.setY(guildsHomeLocationY);
+		teleportLocation.setZ(guildsHomeLocationZ);
+		teleportLocation.setWorld(guildsHomeLocationWorld);
+		
+		if(senderAsPlayer.getWorld() != guildsHomeLocationWorld){
+			s.sendMessage(ChatColor.RED + "You aren't on the same world as that home location, cannot point compass to a different world.");
+			return false;
+		}
+		
+		senderAsPlayer.setCompassTarget(teleportLocation);
+		
+		s.sendMessage(ChatColor.DARK_GREEN + "Your compass is now pointing to your guilds home location.");
 		return true;
 	}
 	

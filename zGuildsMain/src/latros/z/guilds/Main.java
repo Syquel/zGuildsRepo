@@ -33,8 +33,8 @@ public class Main extends JavaPlugin {
 	// TOTAL: 22 / 22
 	
 	// ------------ LAUNCH FEATURES LEVEL UNLOCKS -------------
-	// sethome(D), hometele(D), compass, help (D)
-	// TOTAL: 3/4
+	// sethome(D), hometele(D), compass(D), help (D)
+	// TOTAL: 4/4
 	
 	// ------------ LAUNCH FEATURES ADMIN -------------
 	// setlevel(D), removemember(D), addmember(D), banplayer(D), unbanplayer(D) hometeleother, sethomeother, help(D)
