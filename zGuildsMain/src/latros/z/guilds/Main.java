@@ -18,12 +18,7 @@ public class Main extends JavaPlugin {
 	// MemberManagement.kick() -> Broadcast to the guild, and send a message to the kicked player, about the kick
 	// MemberManagement.setNewLeader() -> Broadcast to the guild, and send a message to the new leader, about the new leader declaration
 	// Recruitment.sendInvite() -> check if they're already in A guild first, if so, don't send them the invite
-	// Util.doesGuildExist() -> check if the guild exists, use this method in...
-	// Misc.getGuildInfo() ^^^^^^^^^^^
-	// MaxMember functionality for leaving / joining guilds
-	// Charter functionality for leaving / joining guilds
 	// Redo most formatting and coloring to be standardized and pretty
-	// Make all commands .tolowercase()
 	
 	// ------------ LAUNCH FEATURES GENERAL -------------
 	// create(D), disband(D), invite(D), cancelinvite(D), checkinvite(D), join(D), leave(D), 
@@ -37,8 +32,8 @@ public class Main extends JavaPlugin {
 	// TOTAL: 4/4
 	
 	// ------------ LAUNCH FEATURES ADMIN -------------
-	// setlevel(D), removemember(D), addmember(D), banplayer(D), unbanplayer(D) hometeleother, sethomeother, help(D)
-	// TOTAL: 5/7
+	// setlevel(D), removemember(D), addmember(D), banplayer(D), unbanplayer(D), help(D)
+	// TOTAL: 5/5
 	
 	static String name, displayname, version, description;
 	static Main plugin;

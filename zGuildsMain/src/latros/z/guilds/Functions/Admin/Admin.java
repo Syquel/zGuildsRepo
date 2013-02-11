@@ -21,14 +21,6 @@ public class Admin {
 	static Date now;
 	static String nowString;
 	
-	public static boolean adminHomeTele(String[] args, CommandSender s) {
-		return true;
-	}	
-	
-	public static boolean adminHomeSet(String[] args, CommandSender s) {
-		return true;
-	}	
-	
 	public static boolean banPlayer(String[] args, CommandSender s) {
 		//Various checks
 		if(Util.isBannedFromGuilds(s) == true){

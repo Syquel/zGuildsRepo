@@ -24,218 +24,211 @@ public class Commands implements CommandExecutor{
 		
 		if (cmd.getName().equalsIgnoreCase("guild") && args.length < 5 && args.length != 0) {
 			
-			if (args[0].matches("create") && s.hasPermission("zguilds.player.create")){
+			if (args[0].toLowerCase().matches("create") && s.hasPermission("zguilds.player.create")){
 				AddGuild.create(args, s);
 				return true;
 				//07/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("disband")){
+			if (args[0].toLowerCase().matches("disband")){
 				RemoveGuild.disband(args, s);
 				return true;
 				//07/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("invite")){
+			if (args[0].toLowerCase().matches("invite")){
 				Recruitment.sendInvite(args, s);
 				return true;
 				//07/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("join")){
+			if (args[0].toLowerCase().matches("join")){
 				AddMember.joinGuild(args, s);
 				return true;
 				//08/02/2013 Intial pass complete
 			}
 			
-			if (args[0].matches("leave")){
+			if (args[0].toLowerCase().matches("leave")){
 				RemoveMember.leaveGuild(args, s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("dismissinvites") || args[0].matches("dismissinvite")){
+			if (args[0].toLowerCase().matches("dismissinvites") || args[0].matches("dismissinvite")){
 				Recruitment.dismissInvite(args, s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("dismissinvite") || args[0].matches("dismissinvites")){
+			if (args[0].toLowerCase().matches("dismissinvite") || args[0].matches("dismissinvites")){
 				Recruitment.dismissInvite(args, s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("checkinvites") || args[0].matches("checkinvite")){
+			if (args[0].toLowerCase().matches("checkinvites") || args[0].matches("checkinvite")){
 				Recruitment.getGuildInvites(args, s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("promote") || args[0].matches("increaserank")){
+			if (args[0].toLowerCase().matches("promote") || args[0].matches("increaserank")){
 				MemberManagement.promote(args, s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("demote") || args[0].matches("decreaserank")){
+			if (args[0].toLowerCase().matches("demote") || args[0].matches("decreaserank")){
 				MemberManagement.demote(args, s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("kick") || args[0].matches("boot")){
+			if (args[0].toLowerCase().matches("kick") || args[0].matches("boot")){
 				RemoveMember.kick(args, s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("newleader") || args[0].matches("setnewleader")){
+			if (args[0].toLowerCase().matches("newleader") || args[0].matches("setnewleader")){
 				MemberManagement.setNewLeader(args, s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if ((args[0].matches("info") || args[0].matches("getinfo")) && args.length >= 2){
+			if ((args[0].toLowerCase().matches("info") || args[0].matches("getinfo")) && args.length >= 2){
 				General.getGuildInfo(args, s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("info") || args[0].matches("getinfo") && args.length == 1){
+			if (args[0].toLowerCase().matches("info") || args[0].matches("getinfo") && args.length == 1){
 				General.getOwnGuildInfo(s);
 				return true;
 				//08/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("list") || args[0].matches("listguilds") || args[0].matches("viewguilds") || args[0].matches("guildlist")){
+			if (args[0].toLowerCase().matches("list") || args[0].matches("listguilds") || args[0].matches("viewguilds") || args[0].matches("guildlist")){
 				General.getGuildList(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("viewroster") || args[0].matches("viewmembers") || args[0].matches("memberlist") || args[0].matches("listmembers") || args[0].matches("roster")){
+			if (args[0].toLowerCase().matches("viewroster") || args[0].matches("viewmembers") || args[0].matches("memberlist") || args[0].matches("listmembers") || args[0].matches("roster")){
 				General.getGuildRoster(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("settype") || args[0].matches("changetype") || args[0].matches("type") || args[0].matches("modifytype")){
+			if (args[0].toLowerCase().matches("settype") || args[0].matches("changetype") || args[0].matches("type") || args[0].matches("modifytype")){
 				ModifyGuild.setGuildType(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("setmaxmembers") || args[0].matches("changemaxmembers") || args[0].matches("maxmembers")){
+			if (args[0].toLowerCase().matches("setmaxmembers") || args[0].matches("changemaxmembers") || args[0].matches("maxmembers")){
 				ModifyGuild.setMaxMembers(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("renamerank") || args[0].matches("changerank") || args[0].matches("modifyrank")){
+			if (args[0].toLowerCase().matches("renamerank") || args[0].matches("changerank") || args[0].matches("modifyrank")){
 				ModifyGuild.setRankName(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("setlowestrank") || args[0].matches("setdefaultrank") || args[0].matches("setbaserank") || args[0].matches("defaultrank")){
+			if (args[0].toLowerCase().matches("setlowestrank") || args[0].matches("setdefaultrank") || args[0].matches("setbaserank") || args[0].matches("defaultrank")){
 				ModifyGuild.setLowestRank(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 
-			if ((args[0].matches("ranklist") || args[0].matches("viewranks") || args[0].matches("ranks")) && args.length > 1){
+			if ((args[0].toLowerCase().matches("ranklist") || args[0].matches("viewranks") || args[0].matches("ranks")) && args.length > 1){
 				General.getGuildRanks(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 			
-			if ((args[0].matches("ranklist") || args[0].matches("viewranks") || args[0].matches("ranks")) && args.length == 1){
+			if ((args[0].toLowerCase().matches("ranklist") || args[0].matches("viewranks") || args[0].matches("ranks")) && args.length == 1){
 				General.getOwnGuildRanks(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("playerinfo") || args[0].matches("getplayerinfo")){
+			if (args[0].toLowerCase().matches("playerinfo") || args[0].matches("getplayerinfo")){
 				General.getPlayerInfo(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 			
-			if ((args[0].matches("help") || args[0].matches("commands") || args[0].matches("viewcommands")) && args.length == 1){
+			if ((args[0].toLowerCase().matches("help") || args[0].matches("commands") || args[0].matches("viewcommands")) && args.length == 1){
 				General.getGeneralCommandList(args, s);
 				return true;
 				//09/02/2013 Initial pass complete
 			}
 			
-			if (args[0].matches("powers") || args[0].matches("power")){
+			if (args[0].toLowerCase().matches("powers") || args[0].matches("power")){
 				
-				if (args[1].matches("sethome") || args[0].matches("markhome")){
+				if (args[1].toLowerCase().matches("sethome") || args[0].matches("markhome")){
 					LevelUnlocks.setGuildHome(args, s);
 					return true;
 					//09/02/2013 Initial pass complete
 				}
 				
-				if (args[1].matches("hometele") || args[0].matches("hometeleport") || args[0].matches("gohome") || args[0].matches("recall")){
+				if (args[1].toLowerCase().matches("hometele") || args[0].matches("hometeleport") || args[0].matches("gohome") || args[0].matches("recall")){
 					LevelUnlocks.homeTeleport(args, s);
 					return true;
 					//10/02/2013 Initial pass complete
 				}
 				
-				if (args[1].matches("help")){
+				if (args[1].toLowerCase().matches("help")){
 					LevelUnlocks.getPowersCommandList(args, s);
 					//09/02/2013 Initial pass complete
 				}
 				
-				if (args[1].matches("compass") || args[0].matches("pointhome") || args[0].matches("direction")){
+				if (args[1].toLowerCase().matches("compass") || args[0].matches("pointhome") || args[0].matches("direction")){
 					LevelUnlocks.compassPoint(args, s);
 					return true;
+					//10/02/2013 Initial pass complete
 				}
 				s.sendMessage(ChatColor.RED + "That is not a recognized guild power command. To see a\nlist of proper commands, type: \"/guild powers help\".");
 				return true;
 			}
 			
-			if (args[0].matches("admin")){
+			if (args[0].toLowerCase().matches("admin")){
 				
-				if(args[1].matches("setlevel")){
+				if(args[1].toLowerCase().matches("setlevel")){
 					Admin.manuallySetGuildLevel(args, s);
 					return true;
 					//09/02/2013 Initial pass complete
 				}
 				
-				if(args[1].matches("removemember")){
+				if(args[1].toLowerCase().matches("removemember")){
 					Admin.manuallyRemoveMember(args, s);
 					return true;
 					//10/02/2013 Initial pass complete
 				}
 				
-				if(args[1].matches("addmember")){
+				if(args[1].toLowerCase().matches("addmember")){
 					Admin.manuallyAddMember(args, s);
 					return true;
 					//10/02/2013 Initial pass complete
 				}
 				
-				if(args[1].matches("banplayer") || args[1].matches("ban")){
+				if(args[1].toLowerCase().matches("banplayer") || args[1].matches("ban")){
 					Admin.banPlayer(args, s);
 					return true;
+					//10/02/2013 Initial pass complete
 				}
 				
-				if(args[1].matches("unbanplayer") || args[1].matches("unban")){
+				if(args[1].toLowerCase().matches("unbanplayer") || args[1].matches("unban")){
 					Admin.unbanPlayer(args, s);
 					return true;
+					//10/02/2013 Initial pass complete
 				}
 				
-				if(args[1].matches("sethome")){
-					Admin.adminHomeSet(args, s);
-					return true;
-				}
-				
-				if(args[1].matches("hometele")){
-					Admin.adminHomeTele(args, s);
-					return true;
-				}
-				
-				if(args[1].matches("help") && args.length == 2){
+				if(args[1].toLowerCase().matches("help") && args.length == 2){
 					Admin.getAdminCommandList(args, s);
 					return true;
 					//09/02/2013 Initial pass complete
